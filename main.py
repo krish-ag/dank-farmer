@@ -2,21 +2,15 @@ import json
 import requests
 import random
 import time
-from headers import headers
+from helpers.headers import headers
 from threading import Thread
-from app import keep_alive
-from notbot import sendMessage, sendM
-from randomwords import words
+from helpers.app import keep_alive
+from helpers.notbot import sendMessage, sendM
+from helpers.randomwords import words
 
 keep_alive()
 notbot = Thread(target=sendMessage).start()
 
-
-COMMANDS = [("pls beg", 50), ("pls fish", 50), ("pls hunt", 50),
-            ("pls dig", 50)]
-
-channel_url = 'https://discordapp.com/api/v6/channels/{}/messages'.format(
-    str(873122878319636490))
 nonce = "722789522290923712"
 
 
@@ -27,66 +21,38 @@ def generate_nonce(nonce):
 def plsBeg():
     n = 0
     while True:
-        f = open("data.json")
-        data = json.load(f)
-        data["content"] = COMMANDS[0][0]
-        data["nonce"] = generate_nonce(nonce)
-        data = json.dumps(data)
-        r = requests.post(channel_url, headers=headers, data=data)
-        print("Executed: ", COMMANDS[0][0])
-        n += 1
-        if n == 30:
-            time.sleep(random.randint(900, 1500))
+        sendM("pls beg")
+        if n == 100:
+            time.sleep(random.randint(60*60*3, 60*60*4))
         else:
-            time.sleep(COMMANDS[0][1])
+            time.sleep(50)
 
 def plsFish():
     n = 0
     while True:
-        f = open("data.json")
-        data = json.load(f)
-        data["content"] = COMMANDS[1][0]
-        data["nonce"] = generate_nonce(nonce)
-        data = json.dumps(data)
-        r = requests.post(channel_url, headers=headers, data=data)
-        print("Executed: ", COMMANDS[1][0])
-        n += 1
-        if n == 30:
-            time.sleep(random.randint(900, 1500))
+        sendM("pls fish")
+        if n == 100:
+            time.sleep(random.randint(random.randint(60*60*3, 60*60*4), 60*60*4))
         else:
-            time.sleep(COMMANDS[1][1])
+            time.sleep(50)
 
 def plsHunt():
     n = 0
     while True:
-        f = open("data.json")
-        data = json.load(f)
-        data["content"] = COMMANDS[2][0]
-        data["nonce"] = generate_nonce(nonce)
-        data = json.dumps(data)
-        r = requests.post(channel_url, headers=headers, data=data)
-        print("Executed: ", COMMANDS[2][0])
-        n += 1
-        if n == 30:
-            time.sleep(random.randint(900, 1500))
+        sendM("pls hunt")
+        if n == 100:
+            time.sleep(random.randint(60*60*3, 60*60*4))
         else:
-            time.sleep(COMMANDS[2][1])
+            time.sleep(50)
 
 def plsDig():
     n = 0
     while True:
-        f = open("data.json")
-        data = json.load(f)
-        data["content"] = COMMANDS[3][0]
-        data["nonce"] = generate_nonce(nonce)
-        data = json.dumps(data)
-        r = requests.post(channel_url, headers=headers, data=data)
-        print("Executed: ", COMMANDS[3][0])
-        n += 1
-        if n == 30:
-            time.sleep(random.randint(900, 1500))
+        sendM("pls dig")
+        if n == 100:
+            time.sleep(random.randint(60*60*3, 60*60*4))
         else:
-            time.sleep(COMMANDS[3][1])
+            time.sleep(50)
 
 beg = Thread(target=plsBeg).start()
 time.sleep(5)
@@ -101,7 +67,6 @@ deposit = [
     "pls gift 1 bank <@898853543375683595>",
     "pls gift 1 bank <@898853543375683595>",
     "pls give all <@898853543375683595>",
-    "pls gift 3 shovel <@898853543375683595>",
     "pls gift 1 stickbug <@898853543375683595>",
     "pls gift 4 skunk <@898853543375683595>",
     "pls gift 5 seaweed <@898853543375683595>",
@@ -120,34 +85,8 @@ deposit = [
 
 def depositItems():
     while True:
-        time.sleep(600)
-        print("saving progress")
         for i in deposit:
-            f = open("data.json")
-            data = json.load(f)
-            data["content"] = i
-            data["nonce"] = generate_nonce(nonce)
-            data = json.dumps(data)
-            r = requests.post(channel_url, headers=headers, data=data)
-            time.sleep(20)
-
-def actLikeHuman():
-    n = 0
-    while True:
-        lenght = random.randint(1,20)
-        sentence = ""
-        for i in range(lenght):
-            sentence += random.choice(words) + " "
-        
-        sendM(sentence)
-        print("I said:", sentence)
-        n += 1
-        if n != 60:
-            time.sleep(random.randint(10, 100))
-        else:
-            n = 0
-            time.sleep(random.randint(1500,3000))
+            sendM(i)
+            time.sleep(30)
 
 save = Thread(target=depositItems).start()
-acthuman = Thread(target=actLikeHuman).start()
-print("---------------------end-------------------------")
