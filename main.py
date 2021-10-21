@@ -8,6 +8,8 @@ from helpers.app import keep_alive
 from helpers.notbot import sendMessage, sendM
 from helpers.randomwords import words
 
+print("Script is started...")
+
 keep_alive()
 notbot = Thread(target=sendMessage).start()
 
@@ -64,29 +66,31 @@ dig = Thread(target=plsDig).start()
 
 deposit = [
     "pls gift 1 bank <@898853543375683595>",
-    "pls gift 1 bank <@898853543375683595>",
-    "pls gift 1 bank <@898853543375683595>",
-    "pls give all <@898853543375683595>",
-    "pls gift 1 stickbug <@898853543375683595>",
-    "pls gift 4 skunk <@898853543375683595>",
-    "pls gift 5 seaweed <@898853543375683595>",
-    "pls gift 2 deer <@898853543375683595>",
-    "pls gift 2 duck <@898853543375683595>",
-    "pls gift 2 boar <@898853543375683595>",
-    "pls gift 30 fish <@898853543375683595>",
-    "pls gift 3 rarefish <@898853543375683595>",
-    "pls gift 2 exoticfish <@898853543375683595>",
-    "pls gift 5 rabbit <@898853543375683595>",
-    "pls gift 15 garbage <@898853543375683595>",
-    "pls gift 5 sand <@898853543375683595>",
-    "pls gift 10 worm <@898853543375683595>",
-    "pls gift 10 junk <@898853543375683595>"
+    "pls give <@898853543375683595> 99k",
+    "pls sell stickbug all",
+    "pls sell skunk all",
+    "pls sell seaweed all",
+    "pls sell deer all",
+    "pls sell duck all",
+    "pls sell boar all",
+    "pls sell fish all",
+    "pls sell rarefish all",
+    "pls sell exoticfish all",
+    "pls sell jellyfish all"
+    "pls sell rabbit all",
+    "pls sell garbage all",
+    "pls sell sand all",
+    "pls sell worm all",
+    "pls sell junk all"
 ]
 
 def depositItems():
     while True:
         for i in deposit:
             sendM(i)
+            print(i)
             time.sleep(30)
 
 save = Thread(target=depositItems).start()
+
+print("Script started successfully...")

@@ -24,7 +24,7 @@ def sendM(message:str):
     data["content"] = message
     data["nonce"] = generate_nonce(nonce)
     data = json.dumps(data)
-    r = requests.post("https://discordapp.com/api/v6/channels/{}/messages".format(random.choice(channels)), headers=headers, data=data)
+    r = requests.post("https://discordapp.com/api/v6/channels/{}/messages".format(random.choice(channels)), headers=random.choice(headers), data=data)
 
 def sendMessage():
     n = 0
@@ -32,7 +32,7 @@ def sendMessage():
         mLen = random.randint(1,30)
         message = ""
         for i in range(1, mLen):
-            message += random.choice(words)
+            message += random.choice(words) + ""
         sendM(message=message)
         n += 1
         if n == 100:
