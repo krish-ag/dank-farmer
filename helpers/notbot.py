@@ -18,13 +18,16 @@ nonce = "722789522290923712"
 def generate_nonce(nonce):
     return str(int(nonce) + random.randint(1, 100))
 
-def sendM(message:str):
+def sendM(message:str, channel=False):
     f = open("helpers/data.json")
     data = json.load(f)
     data["content"] = message
     data["nonce"] = generate_nonce(nonce)
     data = json.dumps(data)
-    r = requests.post("https://discordapp.com/api/v6/channels/{}/messages".format(random.choice(channels)), headers=random.choice(headers), data=data)
+    try:
+        r = requests.post("https://discordapp.com/api/v6/channels/{}/messages".format(random.choice(channels) if not channel else channel), headers=random.choice(headers), data=data)
+    except Exception:
+        print("Exception")
 
 def sendMessage():
     n = 0
